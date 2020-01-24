@@ -11,13 +11,13 @@ void add(node** head,int data)
     node* new_node=(node*)malloc(sizeof(node));
     new_node->data=data;
     new_node->next=NULL;
+    node* last=*head;
     if(*head==NULL)
     {
         *head=new_node;
     }
     else
     {
-        node* last=*head;
         while(last->next!=NULL)
             last=last->next;
         last->next=new_node;
@@ -89,15 +89,13 @@ int remove_node(node** head,int data, node** final)
 }
 void fetch(node **head,int pos)
 {
-    node *temp = *head;
-    int cnt = 1;
-    while(pos>=cnt)
+    node *current = *head;
+    while(pos!=1)
     {
-        if(pos==cnt)
-            printf("%d\n",temp->data);
-        temp = temp->next;
-        cnt++;
+        current = current->next;
+        pos--;
     }
+    printf("%d\n",current->data);
 }
 void traverse(node** head)
 {
@@ -115,7 +113,6 @@ int main()
 {
     int t;
     node* head=NULL;
-    node *final=NULL;
     scanf("%d",&t);
     char s[20];
     int data,pos;
@@ -142,14 +139,17 @@ int main()
         else if(s[2]=='m')
         {
             int status;
+            node *final=NULL;
             scanf("%d",&data);
             status=remove_node(&head,data,&final);
             if(status)
-                traverse(&final);
+            {
+                head=final;
+                traverse(&head);
+            }
             else
             {
-                printf("ELEMENT NOT FOUND");
-                traverse(&final);
+                printf("ELEMENT NOT FOUND\n");
             }
                 
         }

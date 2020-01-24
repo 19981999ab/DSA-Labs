@@ -18,16 +18,17 @@ void push(node** head,int data)
     {
         new_node->prev=NULL;
         *head=new_node;
-        return;
     }
-        
-    while(last->next!=NULL)
+    else
     {
-        last=last->next;
-    }
-    last->next=new_node;
-    new_node->prev=last;
-    return;
+        while(last->next!=NULL)
+        {
+            last=last->next;
+        }
+        last->next=new_node;
+        new_node->prev=last;
+    }  
+
 }
 
 void traverse(node** head)
@@ -48,19 +49,15 @@ void rotation(node** head,int jump)
     while(last->next!=NULL)
         last=last->next;
     int count=0;
-    while(current!=NULL)
+    while(count!=jump)
     {
-        if(count==jump)
-        {
-            current->prev->next=NULL;
-            current->prev=NULL;
-            last->next=*head;
-            *head=current;
-            break;
-        }
         current=current->next;
         count++;
     }
+    current->prev->next=NULL;
+    current->prev=NULL;
+    last->next=*head;
+    *head=current;
 }
 int main()
 {

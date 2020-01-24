@@ -23,22 +23,21 @@ int main()
     }
     for(int i=1;i<10;i++)
     {
+
+        if(hash[i]!=0)
+        {
+            smallest=i;
+            hash[i]--;
+            break;
+        }
+            
+    }
+    for(int i=0;i<10;i++)
+    {
         int temp=hash[i];
         while(temp!=0)
         {
-            if(hash[0]!=0)
-            {
-                smallest=i;
-                while(hash[0]!=0)
-                {
-                    smallest*=10;
-                    hash[0]--;
-                }
-            }
-            else
-            {
-                smallest=smallest*10+i;
-            }
+            smallest=smallest*10+i;
             temp--;
         }
     }
