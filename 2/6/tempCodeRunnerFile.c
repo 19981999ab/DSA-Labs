@@ -1,0 +1,9 @@
+if(cur1==NULL)
+        {
+            while(cur2!=NULL)
+            {
+                push(head3,cur2->data);
+                cur2=cur2->next;
+            }
+            return;
+        }
