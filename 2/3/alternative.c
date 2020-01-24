@@ -1,21 +1,21 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-struct Node{
+typedef struct Node{
     int data;
     struct Node *next;
-};
-struct Node *create(int a)
+}node;
+node *create(int a)
 {
-    struct Node *t;
-    t = (struct Node*)malloc(sizeof(struct Node));
+    node *t;
+    t = (node*)malloc(sizeof(node));
     t->data = a;
     t->next = NULL;
     return t;
 }
-int fetch_(struct Node *head,int pos)
+int fetch_(node *head,int pos)
 {
-    struct Node *temp = head;
+    node *temp = head;
     int cnt = 1;
     while(pos>=cnt)
     {
@@ -25,26 +25,44 @@ int fetch_(struct Node *head,int pos)
         cnt++;
     }
 }
-struct Node *reverse_(struct Node *head)
+node *reverse_(node *head)
 {
-    struct Node *prev = NULL;
-    struct Node *curr = NULL;
-    struct Node *n = head;
-    curr = n;
+    node *prev = NULL;
+    node *curr = NULL;
+    node *temp = head;
+    curr = temp;
     while(curr!=NULL)
     {
-        n = curr->next;
+        temp = curr->next;
         curr->next = prev;
         prev = curr;
-        curr = n;
+        curr = temp;
     }
     head = prev;
     return head;
 }
-struct Node *remove_node(struct Node *head,struct Node *node)
+
+void append(node **head, int x)
 {
-    struct Node *temp = head;
-    struct Node *prev = NULL;
+    node *new_node = NULL;
+    node *temp = *head;
+    new_node = create(x);
+    if(*head==NULL)
+    {
+        *head = new_node;
+        return; 
+    }else{
+        while(temp->next!=NULL)
+            temp=temp->next;   
+        temp->next = new_node;
+        return ;
+    }
+
+}
+node *remove_node(node *head,node *node)
+{
+    node *temp = head;
+    node *prev = NULL;
     if(head==node)
     {
         head = head->next;
@@ -59,29 +77,12 @@ struct Node *remove_node(struct Node *head,struct Node *node)
         }
     }
 }
-void append(struct Node **head, int x)
+int remove_(node *head,int val)
 {
-    struct Node *new_node = NULL;
-    struct Node *temp = *head;
-    new_node = create(x);
-    if(*head==NULL)
-    {
-        *head = new_node;
-        return; 
-    }else{
-        while(temp->next!=NULL)
-            temp=temp->next;   
-        temp->next = new_node;
-        return ;
-    }
-
-}
-int remove_(struct Node *head,int val)
-{
-    struct Node *node = head;
-    struct Node *first = NULL;
-    struct Node *second = NULL;
-    struct Node *track = NULL;
+    node *node = head;
+    node *first = NULL;
+    node *second = NULL;
+    node *track = NULL;
     while(node!=NULL)
     {
         if(node->data == val)
@@ -111,10 +112,10 @@ int remove_(struct Node *head,int val)
     }
 
 }
-void insert_(struct Node **head,int val,int pos)
+void insert_(node **head,int val,int pos)
 {
-    struct Node *temp = *head;
-    struct Node *new_node = create(val);
+    node *temp = *head;
+    node *new_node = create(val);
     int cnt=1;
     int flag=1;
     if(pos==1)
@@ -135,9 +136,9 @@ void insert_(struct Node **head,int val,int pos)
         cnt++;
     }
 }
-void display(struct Node *head)
+void display(node *head)
 {
-    struct Node * t = head;
+    node * t = head;
     while(t!=NULL)
     {
         printf("%d ",t->data);
@@ -147,8 +148,8 @@ void display(struct Node *head)
 int main(){
     int N;
     scanf("%d",&N);
-    struct Node *head=NULL;
-    struct Node *temp=NULL;
+    node *head=NULL;
+    node *temp=NULL;
     head = temp;
     char c[1000],add[]="add",insert[]="insert",remove[]="remove",reverse[]="reverse",fetch[]="fetch";
     int X,Y;
