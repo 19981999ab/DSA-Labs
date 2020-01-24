@@ -49,82 +49,56 @@ void insert(node**head, int data, int pos)
     }
     else
     {
-        while(--pos!=1)
+        while(pos!=2)
         {
             current=current->next;
+            pos--;
         }
         new_node->next=current->next;
         current->next=new_node;
     }
 }
-node* remove_node(node *head,node *node)
+int remove_node(node** head,int data, node** final)
 {
-    struct Node *temp = head;
-    struct Node *prev = NULL;
-    if(head==node)
+    node *current=*head;
+    node *first=NULL,*last=NULL;
+    while(current!=NULL)
     {
-        head = head->next;
-        return head;
-    }
-    while(temp->next==node)
-    {
-        if(temp->next == node)
+        if(current->data==data)
         {
-            temp->next = node->next;
-            return head;
+            if(first==NULL)
+                first=current;
+            else
+                last=current;
         }
+        current=current->next;
     }
-}
-int remove_(struct Node *head,int val)
-{
-    struct Node *node = head;
-    struct Node *first = NULL;
-    struct Node *second = NULL;
-    struct Node *track = NULL;
-    while(node!=NULL)
+    current=*head;
+    if(first==NULL)
+        return 0;
+    else
     {
-        if(node->data == val)
-        {   
-            if(node->data==val)
-            {
-                if(first)
-                    second = node;
-                else
-                    first = node;
-            }
-            node = node->next;
-        }
-        node=node->next;
-    }
-    if(!first&&!second)
-    {   return 0;}
-    else{
-        if(first==second)
-            head = remove_node(head,first);
-        else
+        while(current!=NULL)
         {
-            head = remove_node(head,first);
-            head = remove_node(head,second);
+            if(current!=first&&current!=last)
+                add(final,current->data);
+            current=current->next;
         }
         return 1;
     }
-
 }
-
-void fetch(node** head,int pos)
+void fetch(node **head,int pos)
 {
-    node* current=*head;
-    while(current!=NULL)
+    node *temp = *head;
+    int cnt = 1;
+    while(pos>=cnt)
     {
-        if(pos==1)
-        {
-            printf("%d\n",current->data);
-        }
-        current=current->next;
-        pos--;
+        if(pos==cnt)
+            printf("%d\n",temp->data);
+        temp = temp->next;
+        cnt++;
     }
 }
-
 void traverse(node** head)
 {
     node* current=*head;
@@ -141,6 +115,7 @@ int main()
 {
     int t;
     node* head=NULL;
+    node *final=NULL;
     scanf("%d",&t);
     char s[20];
     int data,pos;
@@ -163,11 +138,20 @@ int main()
             reverse(&head);
             traverse(&head);
         }
+        
         else if(s[2]=='m')
         {
+            int status;
             scanf("%d",&data);
-            remove_node(&head,data);
-            traverse(&head);
+            status=remove_node(&head,data,&final);
+            if(status)
+                traverse(&final);
+            else
+            {
+                printf("ELEMENT NOT FOUND");
+                traverse(&final);
+            }
+                
         }
         else if(s[0]=='i')
         {
