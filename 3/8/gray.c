@@ -1,30 +1,29 @@
 #include <stdio.h> 
 #include <string.h>
-#define ll long long int
-void gray_code(ll num)
+void gray_code(int num)
 {
-    ll arr[33];
-    ll res = num ^ (num >> 1), count=0;
+    int arr[33];
+    int res = num ^ (num >> 1), count=0;
     if(num == 0)
     {
         printf("0\n");
         return;
     }
-    while(res>0)
+    while(res > 0)
     {
         arr[count] = res % 2;
         res /= 2;
         count++;
     }
-    for(ll j = count - 1; j>=0; j--)
-        printf("%lld", arr[j]);
+    for(int j = count - 1; j >= 0; j--)
+        printf("%d", arr[j]);
     printf("\n");
     
 }
-ll decimal(int gray[], int len)
+int decimal(int gray[], int len)
 {  
     int binary[len];
-    ll num;
+    int num;
     binary[0] = gray[0];
     num = binary[0] * (1 << (len - 1));
     for(int i = 1; i < len; i++)
@@ -37,18 +36,17 @@ ll decimal(int gray[], int len)
 }
 int main()
 {
-    ll n;
+    int n;
     char ch;
-    ll d;
-    scanf("%lld", &n);
+    int d;
+    scanf("%d", &n);
     
-    for(ll i = 0; i < n; i++)
+    for(int i = 0; i < n; i++)
     {
         scanf(" %c", &ch);
         if(ch == 'G')
         {
-            // char ch = getchar();
-            scanf("%lld", &d);
+            scanf(" %d", &d);
             gray_code(d);
         }
         else if(ch == 'D')
@@ -59,7 +57,7 @@ int main()
             int gray[len];
             for(int i = 0; i < len; i++)
                 gray[i] = s[i]-'0';
-            printf("%lld\n", decimal(gray, len));
+            printf("%d\n", decimal(gray, len));
         }
     }
 }

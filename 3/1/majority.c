@@ -1,34 +1,61 @@
 #include<stdio.h>
+#include<math.h>
 #define ll long long int
-void findMajority(int arr[], int n) 
+void findMajority(int arr[], int len) 
 { 
-    int cnt = 0, result;
-    for (int i = 0; i < n; ++i) 
+    int count = 0, result;
+    for (int i = 0; i < len; ++i) 
     {
-        if (cnt == 0) 
+        if (count == 0) 
             result = arr[i];
         if (result == arr[i]) 
-            ++cnt;
-        else --cnt;
+            ++count;
+        else --count;
     }
-    cnt=0;
-    for(int i = 0; i < n; ++i)
+
+    count = 0;
+    for(int i = 0; i < len; ++i)
     {
-        if(arr[i]==result)
-            cnt++;
+        if(arr[i] == result)
+            count++;
     }
-    if(cnt > (n/2))
-        printf("%d",result);
+
+    float check = len;
+    check = floor(check/2);
+    if(count > check)
+        printf("%d", result);
+    else if(count == check && len % 2 == 0)
+    {
+        int result_2 = result;
+        for(int i = 0; i <len ; i++)
+        {
+            if(result_2 != arr[i])
+            {
+                result_2 = arr[i];
+            }
+                
+        }
+        count = 0;
+        for(int i = 0; i < len; ++i)
+        {
+            if(arr[i] == result_2)
+                count++;
+        }
+        if(result_2 > result && count == check)
+            printf("%d",result_2);
+        else
+            printf("%d",result);
+    }
     else
         printf("NO MAJORITY ELEMENT");
 } 
 int main() 
 { 
   
-    int num;
-    scanf("%d",&num);
-    int arr[num];
-    for(int i=0;i<num;i++)
+    int len;
+    scanf("%d",&len);
+    int arr[len];
+    for(int i=0;i<len;i++)
     {
         scanf("%d",&arr[i]);
     }

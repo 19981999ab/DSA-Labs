@@ -1,31 +1,87 @@
-#include<stdio.h> 
-#define ll long long int
-int x_max, y_max, z_max, count=0;
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<stdbool.h>
 
-int min_path(int  i, int j, int k)
+#define mod 998244353
+
+int ptr=0;
+
+void primes(int prime[], int max)
 {
-    if(i > x_max || j > y_max || k > z_max)
+    for(int i=2;i<=max;i++)
     {
-        return 0;
-    }
-    else if(i == x_max && j == y_max && k == z_max)
-    {
-        return 1;
-    }
+        bool flag = true;
 
-    return min_path(i + 1, j, k) + min_path(i, j + 1, k) + min_path(i, j, k + 1);
+        for(int j = 2;j*j <= i; j++)
+            if(i%j == 0)
+                flag = false;
+
+        if(flag == true)
+            prime[ptr++] = i;
+    }
+}
+
+void factorise(int freq[], int prime[], int num)
+{
+    for(int i = 2; i <= num; i++)
+    {
+        for(int j = 0; prime[j] <= i && j < ptr ; j++)
+        {
+            int curr = i;
+            while(curr % prime[j]==0)
+            {
+                curr /= prime[j];
+                freq[prime[j]]++;
+            }
+        }
+    }
+}
+
+int modularexpansion(int base, int pow)
+{
+    if(pow == 0)
+        return 1;
+
+    return base * modularexpansion(base % mod, pow - 1) % mod;
 }
 
 int main()
 {
-    int x_min, y_min, z_min;
+    int x1, y1, z1, x2, y2, z2, k, m, n;
+    scanf("%d %d %d\n%d %d %d", &x1, &y1, &z1, &x2, &y2, &z2);
+    
+    k = abs(x2 - x1);
+    m = abs(y2 - y1);
+    n = abs(z2 - z1);
+    
+    int max = k + m + n;
+    int den[max+1], num[max+1], prime[max], mode[max+1];
 
-    scanf("%d %d %d", &x_max, &y_max, &z_max);
-    scanf("%d %d %d", &x_min, &y_min, &z_min);
+    for(int i = 0;i <= max; i++)
+    {
+        den[i] = 0;
+        num[i] = 0;
+        mode[i] = -1;
+    }
 
-    x_max = x_max - x_min;
-    y_max = y_max - y_min;
-    z_max = z_max - z_min;
-    printf("%lld\n", min_path(0,0,0));
+    primes(prime,max);
+    factorise(den,prime,k);
+    factorise(den,prime,m);
+    factorise(den,prime,n);
+    factorise(num,prime,max);
 
+    for(int i=0; i <= max; i++)
+        num[i] -= den[i];
+
+    for(int i=0;i<=max;i++)
+        mode[i] = modularexpansion(i,num[i]);
+
+    long long int ans=1;
+
+    for(int i=0;i <= max; i++)
+        ans=((ans % mod) * (mode[i] % mod)) % mod;
+
+    printf("%lld", ans);
+    return 0;
 }
