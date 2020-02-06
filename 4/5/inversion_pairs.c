@@ -5,7 +5,7 @@ void merge(int arr[], int l, int m, int r)
     int n1 = m - l + 1, n2 = r - m;
     int L[n1], R[n2];
     for(int i = 0; i < n1; i++) L[i] = arr[l + i];
-    for(int i = 0; i < n1; i++) R[i] = arr[m + 1 + i];
+    for(int i = 0; i < n2; i++) R[i] = arr[m + 1 + i];
     int i, j, k;
     i = j = 0;
     k = l;
@@ -49,7 +49,7 @@ int main()
     int arr[len];
     for(int i = 0; i < len; i++)
         scanf("%d", &arr[i]);
-    merge_sort(arr, 0, len);
+    merge_sort(arr, 0, len - 1);
     printArray(arr, len);
     printf("%d", inversions);
 }
