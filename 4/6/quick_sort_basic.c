@@ -18,9 +18,7 @@ int partition(int arr[], int len, int pivot)
             swap(arr, i, j); 
         }
         else if(arr[j] == pivot)
-        {
             pivot_index = j;
-        }
     } 
     swap(arr, i + 1, pivot_index); 
     return i + 1 == pivot_index;
@@ -28,9 +26,7 @@ int partition(int arr[], int len, int pivot)
 void printArray(int *arr, int len)
 {
     for(int i = 0; i < len; i++)
-    {
         printf("%d ", arr[i]);
-    }
     printf("\n");
 }
 int main()
@@ -39,11 +35,10 @@ int main()
     scanf("%d", &len);
     int arr[len];
     for(int i = 0; i < len; i++)
-    {
         scanf("%d", &arr[i]);
-    }
+
     scanf("%d", &pivot);
-    
+
     if(partition(arr, len - 1, pivot))
         printf("ALL SET");
     else

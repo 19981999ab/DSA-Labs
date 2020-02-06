@@ -7,7 +7,6 @@ ll square_root(ll num)
     while (x > y) { 
         x = (x + y) / 2; 
         y = num / x; 
-        // printf("%lld %lld\n", x, y);
     } 
     return x; 
 

@@ -1,3 +1,4 @@
+//Using Merge Sort and custom datatype instead of array
 #include<stdio.h>
 typedef struct Node
 {
@@ -54,10 +55,11 @@ int main()
             count++;
         } 
     }
+    /* To print the array sorted according to end time
     for(int i = 0; i < len; i++)
     {
         printf("%d %d\n", arr[i].start, arr[i].end);
-    }
+    }*/
     printf("%d ", count);
 
 }

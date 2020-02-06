@@ -13,7 +13,11 @@ void merge(int arr[], int l, int m, int r)
     {
         if(L[i] <= R[j])
             arr[k] = L[i++];
-        else    arr[k] = R[j++], inversions += n1 - i;
+        else
+        {
+            arr[k] = R[j++];
+            inversions += n1 - i;
+        }
         k++;
     }
     while(i < n1)
