@@ -43,7 +43,7 @@ int main()
     int arr[len];
     for(int i = 0; i < stops; i++)
         scanf("%d", &arr[i]);
-    merge_sort(arr, 0, stops);
+    merge_sort(arr, 0, stops - 1);
     for(int i = 0; i < stops; i++)
         printf("%d ", arr[i]);
     int t;

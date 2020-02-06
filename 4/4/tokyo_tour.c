@@ -1,49 +1,50 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#define min(a,b) ((a > b) ? b : a)
+void swap(int arr[], int index_1, int index_2)
+{
+    int temp = arr[index_1];
+    arr[index_1] = arr[index_2];
+    arr[index_2] = temp;
+}
+void bubble_sort(int arr[], int len)
+{
+    for(int i = 0; i < len; i++)
+        for(int j = 0; j < len - i - 1; j ++)
+            if(arr[j] > arr[j + 1])
+                swap(arr, j, j + 1);
 
+}
 int main()
 {
     int len, stops;
     scanf("%d %d", &len, &stops);
     int arr[len];
-    memset(arr, 0, sizeof(arr));
     for(int i = 0; i < stops; i++)
-    {
-        int d;
-        scanf("%d", &d);
-        arr[d] = 1;
-    }
+        scanf("%d", &arr[i]);
+
+    bubble_sort(arr, stops);
+
     int t;
     scanf("%d", &t);
     for(int i = 0; i < t; i++)
     {
         int d;
         scanf("%d", &d);
-        int left = d, right = d, min = len;
-        while(left > 0 && right < len)
+        if(d >= arr[stops - 1])
+            printf("%d\n", d - arr[stops - 1]);
+        else
         {
-            if(arr[left])
+            int left = 0, right = stops - 1;
+            while(1)
             {
-                min = left;
-                break;
+                if(right - left <= 1)   break;
+                int m = (right + left) / 2;
+                if(arr[m] < d)  left = m;
+                else right = m;
             }
-            else if(arr[right])
-            {
-                min = right;
-                break;
-            }
-            if(left == 0)
-                right++;
-            else if(right == len - 1)
-                left--;
-            else
-            {
-                right++;
-                left--;
-            }
-            
+            printf("%d\n", min(d - arr[left], arr[right] - d));
         }
-        printf("%d\n", abs(min - d));
     }
 }

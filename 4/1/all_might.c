@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
 #define LIMIT 100000000
 #define PI acos(-1)
