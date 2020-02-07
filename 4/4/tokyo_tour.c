@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #define min(a,b) ((a > b) ? b : a)
@@ -36,6 +37,16 @@ int main()
             printf("%d\n", d - arr[stops - 1]);
         else
         {
+            /*
+                Linear Search
+            // int min_stops = stops;
+            // for(int i = 0; i < stops; i++)
+            // {
+            //     if(abs(arr[i] - d) < min_stops)
+            //         min_stops = abs(arr[i] - d);
+            // }
+            // printf("%d\n", min_stops);
+            */
             int left = 0, right = stops - 1;
             while(1)
             {
