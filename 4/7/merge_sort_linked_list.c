@@ -113,7 +113,7 @@ int main()
             curr = curr->next;
         }
 		length++;
-	}while(getchar() != 10);
+	} while(getchar() != 10);
 	msort(0, length - 1);
 	curr = head;
 	while(curr != NULL) 

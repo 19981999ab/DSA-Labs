@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #define LIMIT 100000000
 #define PI acos(-1)
@@ -7,18 +8,21 @@ typedef struct Node
     int index, x, y;
     float angle;
 }node;
-void calculate_angle(node arr[], int len, int index_min)
+void calculate_angle(node arr[], int len, int all_might_x, int all_might_y)
 {
     for(int i = 0; i < len; i++)
     {
-        if(i != index_min)
+        if(all_might_x == arr[i].x)
+            arr[i].angle = 90;
+        else
         {
-            float tan_th = (arr[index_min].y - arr[i].y);
-            tan_th /= (arr[index_min].x - arr[i].x);
+            float tan_th = (all_might_y - arr[i].y);
+            tan_th /= (all_might_x - arr[i].x);
             arr[i].angle = atan(tan_th) * 180 / PI;
             if(arr[i].angle < 0)
                 arr[i].angle += 180;
         }
+        
     }
 }
 void swap_struct(node arr[], int index_1, int index_2)
@@ -48,6 +52,10 @@ void printArray_index(node arr[], int len, int all_might_index)
     } 
     printf("\n");
 }
+float distance(node arr, int all_might_x, int all_might_y)
+{
+    return abs(all_might_x - arr.x) + abs(all_might_y - arr.y);
+}
 void sort(node arr[], int len, int all_might_x, int all_might_y)
 {
     for(int i = 0; i < len; i++)
@@ -58,9 +66,9 @@ void sort(node arr[], int len, int all_might_x, int all_might_y)
                 swap_struct(arr, j, j + 1);
             else if(arr[j].angle == arr[j + 1].angle)
             {
-                float distance_1  = pow((all_might_x - arr[j].x), 2) + pow((all_might_y - arr[j].y), 2);
-                float distance_2  = pow((all_might_x - arr[j + 1].x), 2) + pow((all_might_y - arr[j + 1].y), 2);
-                if(distance_2 < distance_1)
+                float distance_1  = distance(arr[j], all_might_x, all_might_y);
+                float distance_2  = distance(arr[j + 1], all_might_x, all_might_y);
+                if(distance_1 > distance_2)
                     swap_struct(arr, j, j + 1);
             }
         }
@@ -82,7 +90,7 @@ int main()
         }
     }
     int all_might_index = arr[index_min].index, all_might_x = arr[index_min].x, all_might_y = arr[index_min].y;
-    calculate_angle(arr, len, index_min);
+    calculate_angle(arr, len, all_might_x, all_might_y);
     sort(arr, len, all_might_x, all_might_y);
     printArray_angle(arr, len, all_might_index);
     printArray_index(arr, len, all_might_index);
