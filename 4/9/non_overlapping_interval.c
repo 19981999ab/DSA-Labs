@@ -1,53 +1,45 @@
 #include<stdio.h>
-
-void swap(int arr[], int index_1, int index_2)
+typedef struct Node
 {
-    int temp = arr[index_1];
+    int start, end;
+}node;
+void swap(node arr[], int index_1, int index_2)
+{
+    node temp = arr[index_1];
     arr[index_1] = arr[index_2];
     arr[index_2] = temp;
 }
-void sort(int start[], int end[], int len)
+void bubble_sort(node arr[], int len)
 {
     for(int i = 0;i < len; i++)
-    {
-        int index = 0;
-        for(int j = 0; j < len - i; j++)
-        {
-            if(end[j] > end[index])
-            {
-                index = j;
-            }
-        }
-        swap(end, index, len - i - 1);
-        swap(start, index, len - i - 1);
-    }
+        for(int j = 0; j < len - i - 1; j++)
+            if(arr[j].end > arr[j + 1].end)
+                swap(arr, j , j + 1);
 }
+
 int main()
 {
     int len;
     scanf("%d", &len);
-    int start[len], end[len];
+    node arr[len];
     for(int i = 0; i < len; i++)
-    {
-        int a, b;
-        scanf("%d %d", &a, &b);
-        start[i] = a;
-        end[i] = b;
-    }
-    sort(start, end, len);
-    int count = 1, end_time = end[0];
+        scanf("%d %d", &arr[i].start, &arr[i].end);
+        
+    bubble_sort(arr, len);
+    int count = 1, end_time = arr[0].end;
     for(int i = 1; i < len; i++)
     {
-        if(end_time < start[i])
+        if(end_time < arr[i].start)
         {
-            end_time = end[i];
+            end_time = arr[i].end;
             count++;
         } 
     }
+    /* To print the array sorted according to end time
     for(int i = 0; i < len; i++)
     {
-        printf("%d %d\n", start[i], end[i]);
-    }
+        printf("%d %d\n", arr[i].start, arr[i].end);
+    }*/
     printf("%d ", count);
 
 }

@@ -4,7 +4,8 @@ ll square_root(ll num)
 {
     ll x = num; 
     ll y = 1; 
-    while (x > y) { 
+    while (x > y) 
+    { 
         x = (x + y) / 2; 
         y = num / x; 
     } 
