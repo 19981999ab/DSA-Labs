@@ -59,7 +59,6 @@ float distance(node arr, int all_might_x, int all_might_y)
 void sort(node arr[], int len, int all_might_x, int all_might_y)
 {
     for(int i = 0; i < len; i++)
-    {
         for(int j = 0; j < len - i - 1; j++)
         {
             if(arr[j].angle > arr[j + 1].angle)
@@ -72,7 +71,6 @@ void sort(node arr[], int len, int all_might_x, int all_might_y)
                     swap_struct(arr, j, j + 1);
             }
         }
-    }
 }
 
 int main()

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <string.h>
 #define LIMIT 60
@@ -14,17 +15,25 @@ void swap(node arr[], int index_1, int index_2)
 }
 int compare(node arr1, node arr2)
 {
-    int k;
     if(arr1.len > 0)
-        k = 0;
-    else
-        k = 1;
-    for(; k < abs(arr1.len); k++)
     {
-        if(arr1.s[k] - '0' < arr2.s[k] - '0')
-            return 2; 
-        else if(arr1.s[k] - '0' > arr2.s[k] - '0')
-            return 1;
+        for(int k = 0; k < abs(arr1.len); k++)
+        {
+            if(arr1.s[k] - '0' < arr2.s[k] - '0')
+                return 2; 
+            else if(arr1.s[k] - '0' > arr2.s[k] - '0')
+                return 1;
+        }
+    }
+    else
+    {
+        for(int k = 1; k < abs(arr1.len); k++)
+        {
+            if(arr1.s[k] - '0' < arr2.s[k] - '0')
+                return 1; 
+            else if(arr1.s[k] - '0' > arr2.s[k] - '0')
+                return 2;
+        }
     }
     return 1;
 }
