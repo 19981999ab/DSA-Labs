@@ -1,10 +1,11 @@
 #include <stdio.h>
-#include<time.h>
+#include <string.h>
 int main()
 {
 	int n, m, left, right, count; 
 	scanf("%d %d", &n, &m);
-	int arr[n];
+	int arr[n + 1];
+	memset(arr, 0, sizeof(arr));
 	while(m--)
 	{
 		scanf("%d %d %d", &left, &right, &count);

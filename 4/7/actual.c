@@ -6,10 +6,10 @@ typedef struct Node{
 }node; 
 void push(node** head, int new_data) 
 { 
-	node* new_node = (node*)malloc(sizeof(node)); 
+	node* new_node = malloc(sizeof(node)); 
 	new_node->data = new_data; 
-	new_node->next = (*head); 
-	(*head) = new_node; 
+	new_node->next = *head; 
+	*head = new_node; 
 }
 void split(node *head, node **front, node **back)
 {
@@ -25,8 +25,8 @@ void split(node *head, node **front, node **back)
 			fast = fast -> next;
 		}
 	}
-	*back = head;
-	*front = slow -> next;
+	*front = head;
+	*back = slow -> next;
 	slow -> next = NULL;
 }
 node* merge(node *a, node *b)
