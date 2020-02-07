@@ -18,8 +18,8 @@ int main()
     scanf("%lld", &len);
     for(int i = 0; i < len; i++)
     {
-        int num;
-        scanf("%d", &num);
+        ll num;
+        scanf("%lld", &num);
         printf("%lld ", square_root(num));
     }
     
