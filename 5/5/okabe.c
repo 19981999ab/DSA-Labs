@@ -32,8 +32,8 @@ int binary_search(int arr[], int l, int r, int num)
         if(num <= arr[m]) return m;
         else return -1;
     }
-    if(num > arr[m]) binary_search(arr, m + 1, r, num);
-    else binary_search(arr, l, m, num);
+    if(num > arr[m]) return binary_search(arr, m + 1, r, num);
+    else return binary_search(arr, l, m, num);
 }
 int main()
 {

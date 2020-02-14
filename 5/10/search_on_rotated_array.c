@@ -5,13 +5,13 @@ int binary_search(int arr[], int l, int r, int num)
     int m = (l + r) / 2;
     if(arr[m] == num) return m;
     else if(l > r) return -1;
-    if(num <= arr[m])
+    if(arr[l] <= arr[m])
     {
-        if(num >= arr[l]) binary_search(arr, l, m, num);
-        else binary_search(arr, m + 1, r, num);
+        if(num >= arr[l] && num <= arr[m]) return binary_search(arr, l, m - 1, num);
+        else return binary_search(arr, m + 1, r, num);
     }
-    else if(num <= arr[r]) binary_search(arr, m + 1, r, num);
-    else binary_search(arr, l, m, num);
+    if(num <= arr[r] && num >= arr[m]) return binary_search(arr, m + 1, r, num);
+    else return binary_search(arr, l, m - 1, num);
 
 }
 int main()
