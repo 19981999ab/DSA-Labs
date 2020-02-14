@@ -2,14 +2,13 @@
 #include<string.h>
 #include <stdbool.h>
 #include <limits.h>
-int max_dist, V, temp_dest, distance;
-bool check;
-void DFS(int num, int distance, int arr[V][V], int vis[V])
+int max_dist = INT_MIN, V, temp_dest, distance;
+void DFS(int num, int arr[V][V], int vis[V])
 {
     distance++;
     vis[num]++;
     for(int i = 0; i < V; i++)
-        if(arr[num][i] == 1 && vis[i] == 0)    DFS(i, distance , arr, vis);
+        if(arr[num][i] == 1 && vis[i] == 0)    DFS(i, arr, vis);
     if(distance >= max_dist) max_dist = distance, temp_dest = num;
     distance--; 
     
@@ -30,9 +29,9 @@ int main()
     }
     for(int i = 0; i < V; i++)
     {
-        distance = 0, max_dist = INT_MIN;
+        distance = 0;
         memset(vis, 0, sizeof(vis));
-        DFS(i, 0, arr, vis);
+        DFS(i, arr, vis);
         if(max_dist > final_dist) final_dist = max_dist, final_source = i, final_dest = temp_dest; 
         printf("%d %d %d\n", i, final_dest, max_dist);
     }

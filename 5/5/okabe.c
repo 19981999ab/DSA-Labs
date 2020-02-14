@@ -52,7 +52,15 @@ int main()
         int miles = arr[i + 1] - arr[i] - b;
         if(miles % a) miles = miles / a + 1;
         else miles /= a;
-        int litres = binary_search(can, 0, l - 1, miles);
+        int litres;
+        // int litres = binary_search(can, 0, l - 1, miles);
+        for(int i = 0; i < l; i++)
+            if(can[i] >= miles)
+            {
+                litres = i; break;
+            }
+            
+            
         if(litres == -1)
         {
             printf("NOT POSSIBLE\n");
