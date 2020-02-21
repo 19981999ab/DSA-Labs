@@ -54,6 +54,7 @@ int main()
         else miles /= a;
         int litres;
         // int litres = binary_search(can, 0, l - 1, miles);
+        if(miles > can[l - 1]) litres = -1;
         for(int i = 0; i < l; i++)
             if(can[i] >= miles)
             {
