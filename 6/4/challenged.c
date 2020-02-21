@@ -55,7 +55,7 @@ int main()
         push(&head, x);
         printf("OK pushed %d\n", x);
         if(min == NULL) push(&min, x);
-        else if(x <= min->data) push(&min, x);
+        else if(x <= min -> data) push(&min, x);
     }
     else if(!strcmp(str,"pop"))
     {

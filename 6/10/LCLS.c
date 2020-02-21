@@ -7,28 +7,13 @@ typedef struct Node node;
 node stack[1000001];
 node arr[1000001];
 int ans[1000001];
-int top = -1, n;
-void push(node ele)
-{
-	stack[++top]=ele;
-}
-node peek()
-{
-    if(top>-1)
-        return stack[top];
-}
-void pop()
-{
-	if(top!=-1)
-		top--;
-}
-
+int top = -1;
 int main()
 {
     int n;
-    node temp;
     scanf("%d ",&n);
     for(int i = 0; i < n; i++) scanf("%d %d %d", &arr[i].id, &arr[i].arrival, &arr[i].time);
+    node temp;
     for(int i = 0; i < n - 1; i++)
         for(int j = 0; j < n - 1 - i; j++)
         {
@@ -45,20 +30,20 @@ int main()
                 arr[j + 1] = temp;
             }
         }
-    for (int i = 0; i < n; i++) printf("%d %d\n", arr[i].id, arr[i].arrival);
+    for(int i = 0; i < n; i++) printf("%d %d\n", arr[i].id, arr[i].arrival);
     int currTime = 0, i = 0;
-    do
+    while(top > -1 || i < n)
     {
         while(arr[i].arrival <= currTime && i < n)
-            push(arr[i++]);
+            stack[++top] = arr[i++];
         currTime++;
         stack[top].time--;
-        if(stack[top].time == 0 && top != -1)
+        if(stack[top].time == 0)
         {
             ans[stack[top].id] = currTime;
-			pop();
+            top--;
         }
-    } while(top > -1 || i < n);
+    } 
 
     for(i = 0; i < 1000000; i++)
 		if(ans[i] != 0)

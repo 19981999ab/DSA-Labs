@@ -17,22 +17,22 @@ bool HighPrec(char a, char b){
 int main(){
 	char str[LIM];
 	fgets(str, LIM, stdin);
-	int end = -1;
+	int top = -1;
 	for(int i = 0; str[i] != '\n'; i++)
     {
 		if(str[i] == '(') 
-            str[++end] = str[i];
+            str[++top] = str[i];
 		else if(isOperator(str[i]))
         {
-			while(isOperator(str[end]) && HighPrec(str[end], str[i]) && str[end]!='(')
-                printf("%c", str[end--]);
-			str[++end] = str[i];
+			while(isOperator(str[top]) && HighPrec(str[top], str[i]) && str[top]!='(')
+                printf("%c", str[top--]);
+			str[++top] = str[i];
 		}
 		else if(str[i] == ')')
         {
-			while(str[end] != '(')
-                printf("%c", str[end--]);
-			end--;
+			while(str[top] != '(')
+                printf("%c", str[top--]);
+			top--;
 		}
 		else
             printf("%c", str[i]);

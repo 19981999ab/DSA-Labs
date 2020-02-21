@@ -8,7 +8,8 @@ struct Node{
     struct Node *right;
 };
 typedef struct Node node;
-int value(node *node){
+int value(node *node)
+{
     if(node -> left == NULL && node -> right == NULL)
         return (node -> val - '0');
     if(node -> val == '+')
@@ -25,7 +26,7 @@ void infix(node* node)
     int flag = 0;
     if(node -> left != NULL && node -> right != NULL) printf("("), flag = 1;
     if(node -> left != NULL) infix(node->left);
-    printf("%c",node -> val);
+    printf("%c", node -> val);
     if(node -> right != NULL) infix(node -> right);
     if(flag)
         printf(")");
@@ -34,11 +35,11 @@ node *stack[5000000];
 int top = -1;
 int main()
 { 
-    scanf("%s",s);
+    scanf("%s", s);
     int i = 0;
     while(s[i] != '\0')
     {
-        node *head = (node*)malloc(sizeof(node));
+        node *head = malloc(sizeof(node));
         head -> val = s[i];
         if(s[i] >= '0' && s[i] <= '9')
         {
@@ -52,10 +53,8 @@ int main()
         }
         stack[++top] = head;
         i++;
-    //        printf("%c\n",stack[top]->val);
     }
     node *head = stack[top];
-    //printf("%c",head->right->right->val);
     printf("%d\n", value(head));
     infix(head);
 }
